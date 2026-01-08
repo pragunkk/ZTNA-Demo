@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app
 
 from .auth import authenticate, issue_token
 
@@ -21,9 +21,9 @@ def login():
         return jsonify({"error": "invalid_credentials"}), 401
 
     token = issue_token(
-        secret=request.app.config["SECRET_KEY"],
-        issuer=request.app.config["JWT_ISSUER"],
-        ttl_seconds=request.app.config["JWT_TTL_SECONDS"],
+        secret=current.app.config["SECRET_KEY"],
+        issuer=current.app.config["JWT_ISSUER"],
+        ttl_seconds=current.app.config["JWT_TTL_SECONDS"],
         username=auth["username"],
         role=auth["role"],
     )

@@ -1,0 +1,7 @@
+{
+  "role_access": {
+    "engineering": { "eng": true, "finance": false },
+    "finance": { "eng": true, "finance": true },
+    "intern": { "eng": true, "finance": false }
+  }
+}

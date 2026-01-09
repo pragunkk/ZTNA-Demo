@@ -11,6 +11,8 @@ services:
       - "8181:8181"
     volumes:
       - ./opa:/policies:ro
+    platform: linux/amd64
+
 
   ztna-demo:
     build: .
@@ -24,3 +26,6 @@ services:
       - "5001:5000"
     depends_on:
       - opa
+    platform: linux/arm64/v8
+
+

@@ -21,9 +21,9 @@ def login():
         return jsonify({"error": "invalid_credentials"}), 401
 
     token = issue_token(
-        secret=current.app.config["SECRET_KEY"],
-        issuer=current.app.config["JWT_ISSUER"],
-        ttl_seconds=current.app.config["JWT_TTL_SECONDS"],
+        secret=current_app.config["SECRET_KEY"],
+        issuer=current_app.config["JWT_ISSUER"],
+        ttl_seconds=current_app.config["JWT_TTL_SECONDS"],
         username=auth["username"],
         role=auth["role"],
     )

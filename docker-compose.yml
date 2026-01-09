@@ -1,0 +1,31 @@
+services:
+  opa:
+    image: openpolicyagent/opa:0.67.1
+    command:
+      - "run"
+      - "--server"
+      - "--log-format=json"
+      - "/policies/policy.rego"
+      - "/policies/data.json"
+    ports:
+      - "8181:8181"
+    volumes:
+      - ./opa:/policies:ro
+    platform: linux/amd64
+
+
+  ztna-demo:
+    build: .
+    environment:
+      - OPA_URL=http://opa:8181/v1/data/ztna/allow
+      - SECRET_KEY=change-me-in-prod
+      - JWT_ISSUER=ztna-demo
+      - JWT_TTL_SECONDS=3600
+      - DEBUG=true
+    ports:
+      - "5001:5000"
+    depends_on:
+      - opa
+    platform: linux/arm64/v8
+
+
